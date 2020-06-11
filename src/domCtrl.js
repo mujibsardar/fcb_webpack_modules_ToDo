@@ -1,3 +1,4 @@
+// Controller to control anything and everything DOM related except for eventlisteners
 const domCtrl = (() => {
 	// Call on this function to initialize all dom related elements
 	const init = (toDoArray) => {
@@ -16,12 +17,13 @@ const domCtrl = (() => {
 		root_element.innerHTML = "";
 	}
 
-	
+
+	// Anything that we need to do to setup the basic 'frame' of our page.
 	const setupPage = () => {
 		createNewToDoForm();
 	}
 
-
+	// Create and attach input form fields and button related to adding a new todo
 	const createNewToDoForm = () => {
 			console.log("Hi from createNewToDoForm in domCtrl.js");
 			let root_element = document.getElementById("content");
@@ -39,9 +41,9 @@ const domCtrl = (() => {
 			root_element.appendChild(form_parent_div);
 		}
 
-
-
-
+	// Only expose the init function to the outside world
 	return { init };
 })();
+
+// Don't forget to export, otherwise we won't be able to import. 
 export { domCtrl };

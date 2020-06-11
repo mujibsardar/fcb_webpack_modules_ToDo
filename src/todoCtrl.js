@@ -1,5 +1,6 @@
 import { domCtrl }  from './domCtrl';
 
+// Controller to manage all logical aspects of our todo app.
 const todoCrtl = (() => {
   // This represents the todo list
   let toDoList;
@@ -58,6 +59,9 @@ const todoCrtl = (() => {
     // TODO Finish this
   }
 
+  // Only expose the init function to the outside world
 	return { init };
 })();
+
+// Don't forget to export, otherwise we won't be able to import. 
 export { todoCrtl };
