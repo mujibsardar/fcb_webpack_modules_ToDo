@@ -29,7 +29,9 @@ const todoCrtl = (() => {
     save(){
       localStorage.setItem('toDoList', JSON.stringify(this.toDoList));
       // TODO Refresh the dom because we just did an update
+      domCtrl.refreshToDoList(this.toDoList);
       // TODO Re-attach the event listeners to the dom
+      attachEventListeners();
     }
   }
 
@@ -57,11 +59,21 @@ const todoCrtl = (() => {
   // Setup all the events for all the buttons on the page
   const attachEventListeners = () => {
     // TODO Finish this
+    let newToDoButton = domCtrl.getNewToDoButton();
+    newToDoButton.addEventListener("click", function(){
+      console.log("Button clicked");
+			let toDoBody = domCtrl.getNewToDoBody();
+			let toDoCategory = domCtrl.getNewToDoCategory();
+			let newTodo = new ToDo(toDoBody, toDoCategory);
+			toDoList.addToDo(newTodo);
+			toDoList.save();
+		});
+
   }
 
   // Only expose the init function to the outside world
 	return { init };
 })();
 
-// Don't forget to export, otherwise we won't be able to import. 
+// Don't forget to export, otherwise we won't be able to import.
 export { todoCrtl };

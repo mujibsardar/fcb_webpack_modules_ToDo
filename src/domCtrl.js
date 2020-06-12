@@ -8,8 +8,24 @@ const domCtrl = (() => {
 		 // Setup the new todo form
 		 setupPage();
 		 // Now display all the todo elements
-		 //displayToDoList(toDoArray);
+		 displayToDoList(toDoArray);
 	};
+
+	// Display all the todo's on the page
+	const displayToDoList = (toDoArray) => {
+		console.log("Hi from displayToDoList in domCtrl.js");
+		let root_element = document.getElementById("content");
+		// This will hold all the todos
+		let todo_container = document.createElement("div");
+		// Iterate over all the todo's and display each one
+		toDoArray.forEach((item) => {
+			let toDo_element = document.createElement("p");
+			toDo_element.innerText = `${item.body} (${item.category})`;
+			todo_container.appendChild(toDo_element);
+		});
+		// Place content into todo container
+		root_element.appendChild(todo_container);
+	}
 
 	// Delete all the content of the main div with the id 'content'
 	const resetContainer = () => {
@@ -41,9 +57,35 @@ const domCtrl = (() => {
 			root_element.appendChild(form_parent_div);
 		}
 
+	// Return a reference to the add todo button
+	const getNewToDoButton = () => {
+		return document.getElementById("new_todo_button");
+	}
+
+	// Return the content of the body input element
+	const getNewToDoBody = () => {
+		let todo_body_element = document.getElementById("new_todo_body");
+		let body = todo_body_element.value;
+		return body;
+	}
+
+	// Return the content of the category input element
+	const getNewToDoCategory = () => {
+		let todo_category_element = document.getElementById("new_todo_category");
+		let category = todo_category_element.value;
+		return category;
+	}
+
+	const refreshToDoList = (toDoArray) => {
+		console.log("Hi from refreshPage in domCtrl.js");
+		resetContainer();
+		createNewToDoForm();
+		displayToDoList(toDoArray);
+	}
+
 	// Only expose the init function to the outside world
-	return { init };
+	return { init, getNewToDoButton, getNewToDoBody, getNewToDoCategory, refreshToDoList};
 })();
 
-// Don't forget to export, otherwise we won't be able to import. 
+// Don't forget to export, otherwise we won't be able to import.
 export { domCtrl };
