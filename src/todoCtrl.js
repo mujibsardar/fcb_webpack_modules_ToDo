@@ -2,7 +2,7 @@ import { domCtrl }  from './domCtrl';
 
 // Controller to manage all logical aspects of our todo app.
 const todoCrtl = (() => {
-  // This represents the todo list
+  // This represents the todo list (ToDoList)
   let toDoList;
 
   // Represents a single todo object
@@ -12,24 +12,61 @@ const todoCrtl = (() => {
         this.category = category; // string
         this.completed = completed; // boolean
       }
+      // TODO add getters and setters for the class attributes
+      getBody(){
+        return this.body;
+      }
+
+      setBody(body){
+        this.body = body;
+      }
+
+      getCategory(){
+        return this.category;
+      }
+
+      setCategory(category){
+        this.category = category;
+      }
+
+      getCompleted(){
+        return this.completed;
+      }
+
+      setCompleted(completed){
+        this.completed = completed;
+      }
+
   }
 
   // Hold all the todo objects
   class ToDoList{
     constructor(list){
-      this.toDoList = list; // array
+      this.toDoArray = list; // array
+    }
+
+    getToDoArray(){
+      return this.toDoArray;
+    }
+
+    setToDoArray(toDoArray){
+      this.toDoArray = toDoArray;
     }
 
     // Adding a todo element to the this list
     addToDo(todo){
-      this.toDoList.push(todo);
+      this.toDoArray.push(todo);
+    }
+
+    delete(index){
+      this.toDoArray.splice(index, 1);
     }
 
     // Save the toDoList array to local storage
     save(){
-      localStorage.setItem('toDoList', JSON.stringify(this.toDoList));
+      localStorage.setItem('toDoList', JSON.stringify(getToDoArray()));
       // TODO Refresh the dom because we just did an update
-      domCtrl.refreshToDoList(this.toDoList);
+      domCtrl.refreshToDoList(getToDoArray());
       // TODO Re-attach the event listeners to the dom
       attachEventListeners();
     }
@@ -52,7 +89,7 @@ const todoCrtl = (() => {
      }
 
      // Call on the dom controller to initialize the page
-    domCtrl.init(toDoList.toDoList);
+    domCtrl.init(toDoList.getToDoArray());
     attachEventListeners();
 	};
 
@@ -69,7 +106,18 @@ const todoCrtl = (() => {
 			toDoList.save();
 		});
 
-  }
+    // Attach event listener to every todo delete button
+    document.querySelectorAll('.delete_button').forEach(item => {
+    item.addEventListener('click', event => {
+      console.log(`we are deleting a todo ${item.id}`);
+      let item_index = item.id;
+      // Use item index to delete todo in the toDoList
+      toDoList.delete(item_index);
+      toDoList.save();
+    })
+  })
+
+} // Closing attachEventListeners function
 
   // Only expose the init function to the outside world
 	return { init };

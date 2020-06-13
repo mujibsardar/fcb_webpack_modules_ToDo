@@ -18,10 +18,16 @@ const domCtrl = (() => {
 		// This will hold all the todos
 		let todo_container = document.createElement("div");
 		// Iterate over all the todo's and display each one
-		toDoArray.forEach((item) => {
+		toDoArray.forEach((item, index) => {
 			let toDo_element = document.createElement("p");
 			toDo_element.innerText = `${item.body} (${item.category})`;
 			todo_container.appendChild(toDo_element);
+			// Add delete button to each todo item
+			let delete_element = document.createElement("button");
+			delete_element.className = "delete_button";
+			delete_element.innerText = "Delete";
+			delete_element.id = `${index}`;
+			todo_container.appendChild(delete_element);
 		});
 		// Place content into todo container
 		root_element.appendChild(todo_container);
