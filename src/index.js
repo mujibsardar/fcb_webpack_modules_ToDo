@@ -1,4 +1,4 @@
-import { todoCrtl } from './todoCtrl';
+import { todoCrtl } from './controllers/todoCtrl';
 
 // Entry point to our app.
 const main = ((todo) => {
