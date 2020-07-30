@@ -9,3 +9,11 @@ npm install
 npm run build
 
 then open the html file in the dist folder
+
+Other Helpful Links:
+
+Tutoring: https://avantutor.com
+
+Coding Q&A: https://askavan.com
+
+Free Coding Bootcamp: https://freecodingbootcamp.org
