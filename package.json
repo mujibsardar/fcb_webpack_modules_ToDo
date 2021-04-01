@@ -10,7 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "y18n": ">=4.0.1"
+    "y18n": ">=4.0.1",
+    "elliptic": ">=6.5.4",
+    "ssri": ">=8.0.1",
+    "ini": ">=1.3.6"
   },
   "devDependencies": {
     "webpack": "^4.43.0",
